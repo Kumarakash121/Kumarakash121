@@ -42,10 +42,10 @@ tc-O(n)
            
            maxreach=max(maxreach,i+A[i]);
            if(maxreach>=N-1){
-               return 1;
+               return 1+jump;
            }
            if(i==maxreach){
-               return 0;
+               return -1;
            }
            if(i==currend){
                jump++;
