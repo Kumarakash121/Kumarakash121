@@ -1,0 +1,55 @@
+better soln 
+time complexity-O(n2) two nested loops
+
+
+int canReach(int A[], int N) {
+        // code here
+        
+        int temp[N];
+        for(int i=0;i<N;i++){
+            temp[i]=INT_MAX;
+        }
+        temp[0]=0;
+        for(int i=0;i<N;i++){
+            
+            for(int j=0;j<i;j++){
+                
+                if(i<=j+A[j]){
+                    temp[i]=min(temp[i],temp[j]+1);
+                }
+            }
+        }
+        
+        if(temp[N-1]<0 || temp[N-1]==INT_MAX){
+            return 0;
+        }
+        return temp[n-1];
+    }
+};
+
+
+
+optimal soln
+tc-O(n)
+ int canReach(int A[], int N) {
+        // code here
+        
+       int  jump=0;
+       int currend=0;
+       int maxreach=0;
+       
+       for(int i=0;i<N;i++){
+           
+           maxreach=max(maxreach,i+A[i]);
+           if(maxreach>=N-1){
+               return 1;
+           }
+           if(i==maxreach){
+               return 0;
+           }
+           if(i==currend){
+               jump++;
+               currend=maxreach;
+           }
+       }
+    }
