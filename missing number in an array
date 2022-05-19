@@ -1,0 +1,42 @@
+Time Complexity: O(n). 
+Only one traversal of the array is needed.
+Space Complexity: O(1). 
+No extra space is needed
+Method 1: This method uses the technique of the summation formula. 
+int MissingNumber(vector<int>& array, int n) {
+        // Your code goes here
+        int sum=0;
+        int sum1=(n*(n+1))/2;
+        // cout<<sum1<<endl;
+        for(int i=0;i<n-1;i++){
+            sum+=array[i];
+            
+        }
+        // cout<<sum<<endl;
+        int res=sum1-sum;
+        return res;
+        
+    }
+    
+  Method 2: This method uses the technique of XOR to solve the problem.  
+   Time Complexity: O(n). 
+Only one traversal of the array is needed.
+Space Complexity: O(1). 
+No extra space is needed
+    int MissingNumber(vector<int>& array, int n) {
+        // Your code goes here
+        int sum=0;
+        // int sum1=(n*(n+1))/2;
+        // cout<<sum1<<endl;
+        int sum1=0;
+      for(int i =0;i<n-1;i++){
+          sum^=array[i];
+      }
+       for(int i =1;i<=n;i++){
+          sum1^=i;
+      }
+        // cout<<sum<<endl;
+        int res=sum1^sum;
+        return res;
+        
+    }
