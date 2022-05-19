@@ -1,0 +1,30 @@
+
+Time complexity: O(n). 
+Only one traversal of the loop is needed.
+Auxiliary Space:O(1). 
+There is no space required.
+
+bool detectLoop(Node* head)
+    {
+        // your code hereno
+        Node* fast=head;
+        Node* slow=head;
+        bool flag=0;
+        while(fast && fast->next){
+            // slow=slow->next;
+            // fast=fast->next->next;
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast){
+                flag=1;
+                break;
+            }
+            // slow=slow->next;
+            // fast=fast->next->next;
+        }
+        if(slow==fast && flag){
+            return true;
+        }
+        return false;
+        
+    }
