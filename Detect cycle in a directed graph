@@ -1,0 +1,42 @@
+using dfs-
+
+bool dfs(int i,vector<int> adj[],vector<bool>&visited ,vector<bool>& rec){
+    
+    visited[i]=true;
+    rec[i]=true;
+    for(auto x:adj[i]){
+        
+        if(!visited[x]){
+            if(dfs(x,adj,visited,rec)){
+                return true;
+            }
+        }
+        else if(rec[x]){
+            return true;
+        }
+    }
+    rec[i]=false;
+    return false;
+}
+    bool isCyclic(int V, vector<int> adj[]) {
+        // code here
+        vector<bool>visited(V);
+        vector<bool>rec(V);
+        for(int i=0;i<V;i++){
+            visited[i]=false;
+            rec[i]=false;
+            
+        }
+        
+        for(int i=0;i<V;i++){
+            if(!visited[i]){
+                if(dfs(i,adj,visited,rec)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    Expected Time Complexity: O(V + E)
+Expected Auxiliary Space: O(V)
