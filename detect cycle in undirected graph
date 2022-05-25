@@ -1,0 +1,43 @@
+
+using DFS-
+
+
+bool dfs(int i,vector<int> adj[] ,int parent,vector<bool>&visited){
+    
+    
+    visited[i]=true;
+    for(auto nbr:adj[i]){
+        if(!visited[nbr]){
+            if(dfs(nbr,adj,i,visited)){
+                return true;
+            }
+            
+        }
+        else if(nbr!=parent){
+            return true;
+            
+        }
+    }
+    return false;
+}
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here 
+        vector<bool>visited(V);
+    for(int i=0;i<V;i++){
+        visited[i]=false;
+    }
+    
+    for(int i=0;i<V;i++){
+        if(!visited[i]){
+            if(dfs(i,adj,-1,visited)){
+                return true;
+            }
+        }
+    }
+    return false;
+    }
+    
+  Time Complexity: O(V+E). 
+The program does a simple DFS Traversal of the graph which is represented using adjacency list. So the time complexity is O(V+E).
+Space Complexity: O(V). 
+To store the visited array O(V) space is required.
