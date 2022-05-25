@@ -1,0 +1,58 @@
+   /*returns min element from stack*/
+   
+   
+   
+       long long int min;
+       int getMin(){
+           
+           //Write your code here
+           
+          if(!s.empty()){
+              return min;
+          }
+          else{
+              return -1;
+          }
+       }
+       
+       /*returns poped element from stack*/
+       int pop(){
+           
+           //Write your code here
+           if(s.empty()){
+               return -1;
+           }
+           else if(min>=s.top()){
+               int ov=min;
+               min=2*min-s.top();
+               s.pop();
+               return ov;
+               
+           }
+           else{
+               int p=s.top();
+               s.pop();
+               return p;
+           }
+       }
+       
+       /*push element x into the stack*/
+       void push(int x){
+           
+           //Write your code here
+          if(s.empty()){
+             s.push(x);
+             min=x;
+          }
+          else if(x>=min){
+              s.push(x);
+          }
+          else{
+              s.push(2*x-min);
+              min=x;
+          }
+           
+       }
+       
+Expected Time Complexity : O(1) for all the 3 methods.
+Expected Auixilliary Space : O(1) for all the 3 methods.
