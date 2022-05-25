@@ -1,0 +1,32 @@
+bool isPalindrome(Node *head)
+    {
+        //Your code here
+        Node* slow=head;
+        Node* fast=head;
+        Node* prev=NULL;
+        Node* temp;
+        while(fast && fast->next){
+            fast=fast->next->next;
+            temp=slow->next;
+            // slow=slow->next;
+            slow->next=prev;
+            prev=slow;
+            slow=temp;
+            // slow->next=prev;
+            // prev=temp;
+            
+            }
+        slow=fast? slow->next:slow;
+        while(prev || slow){
+            if(prev->data!=slow->data){
+                return false;
+            }
+            prev=prev->next;
+            slow=slow->next;
+        }
+        return true;
+    }
+    
+    
+    Expected Time Complexity: O(N)
+Expected Auxialliary Space Usage: O(1)  (ie, you should not use the recursive stack space as well)
