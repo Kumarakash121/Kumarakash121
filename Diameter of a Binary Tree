@@ -1,0 +1,45 @@
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(Height of the Tree).
+
+Approach:-
+Please draw a sample tree first. You will see that a diameter is nothing but maximum( left height +right height+1) for a node. Keep updating this value for every node.
+
+You can calculate height of the tree for every node and then compare it with the value (in this case "ans" ). The return value is the height of the tree for a node.
+
+It will take O( N^2 ) if we write a separate height function, as we are visiting each node twice. Why not, visit the tree once and calculate height in the same recursion keep a check on "ans".
+
+Time Comp - O(N)
+
+
+
+int ans=0;
+    int diame(Node* root) {
+        // if(root->left==NULL and root->right==NULL) return 0;
+        // int l=1+diame(root->left);
+        // int r=1+diame(root->left);
+        // return max(l,max(r,(l+r)));
+        // Your code here
+        if(!root){
+    
+         return 0;
+        }
+        
+      int left =  diame(root->left);
+      int right= diame(root->right);
+      ans=max(ans,1+left+right);
+      return 1+max(left,right);
+       
+    }
+    
+    // int ans=0;
+    int diameter(Node* root) {
+        // Your code here
+        if(!root){
+    
+         return 0;
+        }
+        
+      diame(root);
+      return ans;
+       
+    }
