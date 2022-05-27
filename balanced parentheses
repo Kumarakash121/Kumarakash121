@@ -1,0 +1,53 @@
+all the parentheses are matched, i.e., every opening parenthesis has a corresponding closing parenthesis.
+the matched parentheses are in the correct order​, i.e., an opening parenthesis should come before the closing parenthesis.
+
+ALGORITHM
+
+Declare an empty stack.
+Push an opening parenthesis on top of the stack.
+In case of a closing bracket, check if the stack is empty.
+If not, pop in a closing parenthesis if the top of the stack contains the corresponding opening parenthesis.
+If the parentheses are valid,​ then the stack will be empty once the input string finishes.
+
+
+
+Expected Time Complexity: O(|x|)
+Expected Auixilliary Space: O(|x|)
+
+
+
+bool ispar(string x)
+    {
+        // Your code here
+        
+        
+        
+        stack<char>s;
+        
+        for(int i=0;i<x.length();i++){
+            
+            if(x[i]=='{' || x[i]=='[' || x[i]=='('){
+                s.push(x[i]);
+                
+            }
+            else{
+                
+                if(s.empty()){
+                    return false;
+                    
+                }
+                if((x[i]=='}' && s.top()!='{') || (x[i]==']' && s.top()!='[') || (x[i]==')' && s.top()!='(' )){
+                    return false;
+                }
+                else{
+                    s.pop();
+                }
+            }
+        }
+        
+           return s.empty(); 
+            
+        
+    }
+
+};
