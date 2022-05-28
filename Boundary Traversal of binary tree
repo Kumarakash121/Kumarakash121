@@ -1,0 +1,107 @@
+
+
+
+We break the problem in 3 parts: 
+1. Print the left boundary in top-down manner. 
+2. Print all leaf nodes from left to right, which can again be sub-divided into two sub-parts: 
+…..2.1 Print all leaf nodes of left sub-tree from left to right. 
+…..2.2 Print all leaf nodes of right subtree from left to right. 
+3. Print the right boundary in bottom-up manner.
+We need to take care of one thing that nodes are not printed again. e.g. The left most node is also the leaf node of the tree.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+void printleaves(Node *root,vector<int>&v){
+    
+    
+    // if(root->left==NULL && root->right==NULL){
+    //     v.push_back(root->data);
+    //     return;
+    // }
+    if(root==NULL){
+        return;
+    }
+    if(root->left==NULL && root->right==NULL){
+        v.push_back(root->data);
+        return;
+    }
+    printleaves(root->left,v);
+    
+    // if(root->left==NULL && root->right==NULL){
+    //     v.push_back(root->data);
+    //     return;
+    // }
+     printleaves(root->right,v);
+    
+}
+
+void printright(Node * root,vector<int>&v){
+    if(root==NULL){
+        return;
+    }
+    
+   if(root->left==NULL && root->right==NULL){
+       return;
+   }
+    if(root->right){
+        printright(root->right,v);
+        v.push_back(root->data);
+        return;
+    }
+    else if(root->left){
+        printright(root->left,v);
+        v.push_back(root->data);
+        return;
+    }
+}
+
+
+void printleft(Node *root,vector<int>&v){
+    
+    if(root==NULL){
+        return;
+    }
+    
+    
+    if(root->left==NULL && root->right==NULL){
+        return;
+    }
+    if(root->left){
+        v.push_back(root->data);
+        printleft(root->left,v);
+        return;
+        
+    }
+    else if(root->right){
+        v.push_back(root->data);
+        printleft(root->right,v);
+        return;
+    }
+}
+
+
+    vector <int> boundary(Node *root)
+    {
+        //Your code here
+        vector<int>v;
+        
+        if(root==NULL){
+            
+            return v;
+            
+        }
+        v.push_back(root->data);
+        if(root->left==NULL && root->right==NULL){
+            return v;
+        }
+        printleft(root->left,v);
+         printleaves(root,v);
+         printright(root->right,v);
+        return v;
+        
+    }
+    
+    
+Time Complexity: O(n) where n is the number of nodes in binary tree.
+
+Auxiliary Space: O(n)
