@@ -1,0 +1,22 @@
+ int balanced(Node * root,int &flag){
+        if(!root ){
+            return 0;
+        }
+        
+        int left=balanced(root->left,flag);
+        int right=balanced(root->right,flag);
+        if(abs(left-right)>1){
+            flag=0;
+        }
+        return 1+max(left,right);
+    }
+    bool isBalanced(Node *root)
+    {
+        //  Your Code here
+        if(!root || (root->left==NULL && root->right==NULL)){
+            return true;;
+        }
+        int flag=1;
+        balanced(root,flag); 
+        return flag;
+    }
