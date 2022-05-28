@@ -1,0 +1,115 @@
+tc-O(n)
+sc-O(1)
+
+
+There can be Mutliple ways to frame the solution once we get the intuition right !! So, what should the intuition be ? Let's discuss that out !
+
+Let's consider array to have no 0s (for the moment)......
+So, on what factor does the answer depends now ?? It surely depends on the count of negative numbers in the array !!
+
+There are 2 possibilities - either the count of -ve numbers is even or odd.... --->>>
+
+If the count is even, then obviously we would want to include all of them(in fact the whole array) to maximise the product. As multiplying an even number of -ve numbers would make the result +ve.
+
+If the count is odd, then we would want to exclude one -ve number from our product, so that the product gets maximised. So, now the question is, which -ve number to exclude? Example ---> arr={-2,-3,-1,-4,-5} which number should be excluded ? On observing it , we should get one fact clear, that the number which is going to get ignored is either going to be the first one or the last one.
+
+Note that, we cannot exclude a -ve number that is not the first or the last, because, if we do so, we will need to exclude all(because you are breaking the product at this point) other -ve nums following that -ve number and then that needn't result in the maximum product.
+Having said all that, now the question is whether to exclude the first -ve num or the last -ve num in the array. We can only know the answer by trying both.
+So, firstly we will take the product from the beginning of the array and we will include the first -ve number and will leave out the last one !!
+And will do the vice-versa for checking the other scenario !!
+So , in that example we would leave the first -ve number... (-2 and then total_product will be product of rest of the numbers in array) or we would leave the last number...(-5) ... And maximum of those 2 cases will be the answer !!
+Now, what if array has zeroes? Well, it changes nothing much to be honest, we can consider the part on both the side of 0 as the subarrays and the maximum product that way will be the max(subarray1_ans, subarray2_ans) .... And how to mark the division point ? How do we seperate the subarrays????...
+Thats pretty simple and we have done it in kadane's algo, just make the curr_ongoing_prod=1 !! And maintain one maxm_prod variable seperately ....
+
+Example -->>> arr={-2,1,4,5,0,-3,4,6,1,-2} .... so we can consider subarray1={-2,1,4,5} and subarray2={-3,4,6,-2} and then the max_ans(subarray1,subarray2) will be our answer !!
+
+Let's have a look on our code now ....
+
+
+long long maxProduct(vector<int> arr, int n) {
+	    // code here
+	     if(n==1){
+	        return arr[0];
+	        
+	    }
+	    if(n==0){
+	        return 0;
+	    }
+	    long long int pro=1;
+	    long long int res=1;
+	   long long int pro1=1;
+	    long long int l=1;
+	    long long int r=1;
+	    for(int i=0;i<n;i++){
+	        
+	         pro=pro*arr[i];
+	         l=max(l,pro);
+	        
+	         pro1=pro1*arr[n-i-1];
+	         r=max(r,pro1);
+	        if(pro==0){
+	            pro=1;
+	        }
+	        if(pro1==0){
+	            pro1=1;
+	        }
+	        res=max(l,r);
+	}
+	return res;
+	}
+};
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
+method2-
+
+
+
+
+long long maxProduct(vector<int> arr, int n) {
+	    // code here
+	    
+	    if(n==1){
+	        return arr[0];
+	        
+	    }
+	    if(n==0){
+	        return 0;
+	    }
+
+	    long long int res=1;
+	   
+	   long long int max1=1;
+	    long long int min1=1;
+	   long long temp=1;
+	   
+	   for(int i=0;i<n;i++){
+	       
+	       
+	       if(arr[i]>0){
+	           max1=max1*arr[i];
+	           min1=min(temp,min1*arr[i]);
+	       }
+	      else if(arr[i]==0){
+	           
+	           min1=1;
+	           max1=1;
+	       }
+	       else{
+	           swap(min1,max1);
+	           min1=min1*arr[i];
+	           max1=max(temp,max1*arr[i]);
+	           
+	       }
+	       res=max(res,max1);
+	       
+	   }
+	    return res;
+	}
+  
+  
+  tc-O(n)
+  sc-O(1)
+  
+  
