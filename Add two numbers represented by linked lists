@@ -1,0 +1,43 @@
+Node* reverse(Node * first){
+        Node* prev=NULL;
+        Node* curr=first;
+        Node* next=NULL;
+        while(curr!=NULL){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+            
+        
+        }
+        return prev;
+    }
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        // code here
+       
+         first=reverse(first);
+         second=reverse(second);
+       int sum=0;
+       int c=0;
+       Node* temp;
+      Node* prev=temp;
+       
+       while(first  || second || c){
+           sum=(first?first->data:0)+(second?second->data:0)+c;
+          first=first?first->next:NULL;
+          second=second?second->next:NULL;
+          
+          c=sum/10;
+          Node* p=new Node(sum%10);
+          temp->next=p;
+          temp=temp->next;
+          
+       }
+    //   reverse(prev->next);
+       return reverse(prev->next);
+    }
+    
+    
+Expected Time Complexity: O(N+M)
+Expected Auxiliary Space: O(Max(N,M)) for the resultant list.
