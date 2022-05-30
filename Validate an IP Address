@@ -1,0 +1,31 @@
+ int isValid(string s) {
+            // code here
+            
+            //  /ptr=NULL;
+            if(count(s.begin(),s.end(),'.')!=3){
+                return 0;
+            }
+            stringstream ss(s);
+             string ptr;
+            
+            while(getline(ss,ptr,'.')){
+                // ptr=strtok(NULL,".");
+            if(ptr.length()==0 || ptr.length()>3){
+                return 0;
+            }
+            if(ptr.find('0')==0  && ptr.length()>1){
+                return 0;
+            }
+            for(int i=0;i<ptr.length();i++){
+                if(!isdigit(ptr[i])){
+                    return 0;
+                }
+            }
+            if(stoi(ptr)>255){
+                return 0;
+            }
+            }
+            return 1;
+        }
+Expected Time Complexity: O(N), N = length of the string.
+Expected Auxiliary Space: O(1)
