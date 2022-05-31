@@ -1,0 +1,41 @@
+void reverse(int *arr,long long int low,long long int high){
+    while(low<=high){
+        int temp=arr[low];
+        arr[low]=arr[high];
+        arr[high]=temp;
+        low++;
+        high--;
+    }
+}
+void rotateArr(int arr[], int d, int n){
+    code here
+    d=d%n;
+    reverse(arr,0,d-1);
+    reverse(arr,d,n-1);
+    reverse(arr,0,n-1);
+    
+}
+
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+
+void rotateArr(int arr[], int d, int n){
+    // code here
+   d=d%n;
+    long long int temp[n];
+    for(int i=n-1;i>=0;i--){
+        temp[(i+n-d)%n]=arr[i];
+    }
+    for(int i=0;i<n;i++){
+        arr[i]=temp[i];
+    }
+    
+}
+
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(N)
+
+
