@@ -1,0 +1,30 @@
+int sum(Node*root){
+       if(!root){
+           return 0;
+       } 
+     if(!root->left && !root->right){
+         return root->data;
+         
+     }
+     
+     
+     int l=sum(root->left);
+     int r=sum(root->right);
+     if(root->data!=l+r){
+        return 0;
+     }
+    //  return 0;
+     return l+r+root->data;
+    }
+    bool isSumTree(Node* root)
+    {
+         // Your code here
+         if(!root){
+             return true;
+         }
+         
+        return sum(root);
+    }
+    
+    Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(Height of the Tree)
