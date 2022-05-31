@@ -33,3 +33,8 @@ int findLongestConseqSubseq(int arr[], int N)
 Expected Time Complexity: O(N).
 Expected Auxiliary Space: O(N).
 
+✔️ Solution - III (Using Hashset - w/ optimizations)
+
+We can form a solution without the need to spend time erasing elements from the hashset.
+
+Instead of taking the first element that we find in the hashset and iterating both forward and backward, we can just keep skipping till we find that hashset contains num - 1. Finally, we can just iterate in the forward direction till we find consecutive elements in hashset and update longest at the end
