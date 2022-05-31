@@ -1,0 +1,40 @@
+ ✔️ Solution - I (Sorting)
+
+We can simply sort the given array and compare consecutive elements. Following cases exists:
+
+nums[i] == nums[i-1] + 1: This means the current element is consecutive to previous, so increment current streak count.
+nums[i] == nums[i-1]: We have found the same element as previous. Skip it, and see if we can still extend the sequence with next elements.
+None of above : We can't extend the sequence any further. Update longest to store longest formed streak till now and reset curlongest.
+ 
+ 
+ 
+ 
+ 
+ int findLongestConseqSubseq(int arr[], int N)
+    {
+      //Your code here
+    sort(arr,arr+N);
+    int maxsum=0;
+    int cnt=1;
+    for(int i=1;i<N;i++){
+        
+        if(arr[i]==arr[i-1]){
+            continue;
+        }
+        else if(arr[i]==arr[i-1]+1){
+            cnt++;
+        }
+        else{
+            maxsum=max(maxsum,cnt);
+            cnt=1;
+        }
+    }
+    return max(maxsum,cnt);
+    }
+    
+    
+    Time Complexity : O(NlogN), where N is the number of elements in nums
+space Complexity : O(1), ignoring the space required by sorting algorithm.
+
+
+
