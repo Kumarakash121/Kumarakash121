@@ -1,0 +1,45 @@
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(1).
+ 
+ int missingNumber(int arr[], int n) 
+    { 
+        // Your code here
+        for(int i=0;i<n;i++){
+            while(arr[i]>=1 && arr[i]<=n && arr[i]!=arr[arr[i]-1] ){
+                swap(arr[i],arr[arr[i]-1]);
+            }
+        }
+        
+        for(int i=0;i<n;i++){
+            if(arr[i]!=i+1){
+                return i+1;
+            }
+        }
+        return n+1;
+        
+    } 
+    
+    
+    brute force--------------------------------------------------------------------------------------------------------------------------------------------->
+    
+     int missingNumber(int arr[], int n) 
+    { 
+        // Your code here
+        unordered_map<int,int>m;
+        
+        for(int i=0;i<n;i++){
+           m[arr[i]]++;
+        }
+        
+        for(int i=0;i<n;i++){
+            if(!m.count(i+1)){
+                return i+1;
+            }
+        }
+        return n+1;
+        
+    } 
+    
+    
+    time com.=O(n)
+    space complexity=O(n)
