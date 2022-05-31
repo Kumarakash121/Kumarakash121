@@ -1,0 +1,14 @@
+ void mirror(Node* node) {
+        // code here
+         if(!node){
+        return ;
+    }
+    //  Node* temp=root->left;
+   mirror(node->left);
+   mirror(node->right);
+   swap(node->left,node->right);
+    }
+    
+    
+    Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(Height of the Tree).
