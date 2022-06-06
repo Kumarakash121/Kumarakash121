@@ -1,0 +1,39 @@
+int atoi(string str) {
+        //Your code here
+        bool negate =false;
+        if(str[0]=='-'){
+            negate=true;
+        }
+        int res=0;
+        int i;
+        if(negate==true){
+             i=1;
+        }
+        else{
+             i=0;
+        }
+        bool flag=true;
+        for(;str[i]!='\0';i++){
+            int ch=str[i]-'0';
+            if(ch>=0 && ch<=9){
+                res=res*10+ch;
+            }
+            else{
+                flag=false;
+            }
+        }
+        if(negate==true){
+            res=-1*res;
+        }
+        else{
+            res=res;
+        }
+        if(!flag){
+            return -1;
+        }
+        return res;
+    }
+    
+    
+    Expected Time Complexity: O(|S|), |S| = length of string str.
+Expected Auxiliary Space: O(1)
