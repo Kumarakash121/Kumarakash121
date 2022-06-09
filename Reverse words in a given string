@@ -1,0 +1,35 @@
+string reverseWords(string S) 
+    { 
+        // code here 
+        
+        vector<string>temp;
+        string str="";
+        
+        for(int i=0;i<S.length();i++){
+            
+            if(S[i]=='.'){
+                temp.push_back(str);
+                 str="";
+                
+            }
+            else{
+                str+=S[i];
+            }
+        }
+         temp.push_back(str);
+        str="";
+        
+        for(int j=temp.size()-1;j>0;j--){
+            str+=temp[j];
+            str+='.';
+            // cout<<temp[j]<<".";
+            
+        }
+        str+=temp[0];
+        return str;
+    } 
+    
+    
+    Expected Time Complexity: O(|S|)
+Expected Auxiliary Space: O(|S|)
+    
