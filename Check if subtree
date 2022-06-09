@@ -1,0 +1,35 @@
+ bool issame(Node* T,Node* S){
+        
+        
+        if(T==NULL && S==NULL){
+            return true;
+        }
+        if(T==NULL || S==NULL){
+            return false;
+        }
+        
+        return ((T->data==S->data)&& issame(T->left,S->left) && issame(T->right,S->right) );
+    }
+    bool isSubTree(Node* T, Node* S) 
+    {
+        // Your code here
+        if(S==NULL){
+            return true;
+        }
+        if(T==NULL){
+            return false;
+        }
+        
+        if(issame(T,S)){
+            return true;
+        }
+        
+        return isSubTree(T->left,S) || isSubTree(T->right,S);
+        
+        
+        
+    }
+    
+    
+    Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(N).
