@@ -1,0 +1,61 @@
+vector<int> rightView(Node *root)
+    {
+       // Your Code here
+       queue<Node*>q;
+       q.push(root);
+       vector<int>v;
+       while(!q.empty()){
+           int n=q.size();
+           
+           while(n){
+           Node* ans=q.front();
+           q.pop();
+           
+           
+           if(n==1){
+               v.push_back(ans->data);
+           }
+           
+           if(ans->left){
+               q.push(ans->left);
+           }
+           if(ans->right){
+               q.push(ans->right);
+           }
+           n--;
+           }
+           
+           
+           
+       }
+       return v;
+    }
+    
+    Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(Height of the Tree).
+
+
+
+
+vector<int> rightSideView(TreeNode* root) {
+        vector<int> view;
+        rightView(root, view, 0);
+        return view;
+    }
+private:
+    void rightView(TreeNode* root, vector<int>& view, int level) {
+        if (!root) {
+            return;
+        }
+        if (view.size() == level) {
+            view.push_back(root -> val);
+        }
+        rightView(root -> right, view, level + 1);
+        rightView(root -> left, view, level + 1);
+    }
+    
+    
+     Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(Height of the Tree).
+
+    
