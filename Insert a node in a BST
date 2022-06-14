@@ -1,0 +1,47 @@
+
+ Node* insert(Node* root, int Key) {
+if(root==NULL   ){
+        return new Node(Key);
+        
+    }
+    
+    
+    if(root->data>Key){
+        root->left=insert(root->left,Key);
+    }
+    else if(root->data<Key){
+        root->right=insert(root->right,Key);
+    }
+    
+    return root;
+    
+    
+    
+    Node* insert(Node* root, int Key) {
+    // Your code here
+    
+    
+    Node* curr=root;
+    Node* par=NULL;
+    
+    while(curr!=NULL){
+        par=curr;
+        if(curr->data>Key){
+            curr=curr->left;
+        }
+        else{
+            curr=curr->right;
+        }
+    }
+    if(par==NULL){
+        return new Node(Key);
+    }
+    if(par->data>Key){
+        par->left=new Node(Key);
+    }
+    else if(par->data<Key){
+        par->right=new Node(Key);
+    }
+    
+    return root;
+}
