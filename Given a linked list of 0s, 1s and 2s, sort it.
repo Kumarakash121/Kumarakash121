@@ -1,0 +1,89 @@
+ Node* segregate(Node *head) {
+        
+        // Add code here
+        
+        int zero=0;
+        int one=0;
+        int two=0;
+        Node*temp=head;
+        while(temp!=NULL){
+            if(temp->data==0){
+                zero++;
+            }
+             else if(temp->data==1){
+                one++;
+            }
+            else{
+                two++;
+            }
+            temp=temp->next;
+        }
+        
+        Node* curr=head;
+        
+        while(curr!=NULL){
+            if(zero){
+                curr->data=0;
+                zero--;
+            }
+             else if(one){
+                curr->data=1;
+                one--;
+            }
+            else{
+                curr->data=2;
+                two--;
+            }
+            curr=curr->next;
+        }
+        
+        return head;
+    }
+    
+    
+    without data replacement 
+    
+    
+    
+      Node* segregate(Node *head) {
+        
+        // Add code here
+        
+        Node* zeroh=new Node(-1);
+        Node* zerot= zeroh;
+        Node* oneh=new Node(-1);
+         Node* onet= oneh;
+        Node* twoh=new Node(-1);
+         Node* twot= twoh;
+         Node*curr=head;
+         while(curr!=NULL){
+             
+             if(curr->data==0){
+                 zerot->next=curr;
+                 zerot=curr;
+             }
+             else if(curr->data==1){
+                 onet->next=curr;
+                 onet=curr;
+             }
+             else if(curr->data==2){
+                 twot->next=curr;
+                 twot=curr;
+             }
+             curr=curr->next;
+         }
+         if(oneh->next!=NULL){
+             zerot->next=oneh->next;
+         }
+         else{
+            zerot->next=twoh->next; 
+         }
+         
+         onet->next=twoh->next;
+         twot->next=NULL;
+         head=zeroh->next;
+         delete zeroh;
+         delete oneh;
+         delete twoh;
+         return head;
+    }
