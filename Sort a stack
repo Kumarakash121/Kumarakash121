@@ -1,0 +1,40 @@
+void sorted(stack<int>& s,int temp){
+    
+    
+    if(s.empty() || (!s.empty() && s.top()<temp)){
+        s.push(temp);
+        return;
+    }
+    int n=s.top();
+    s.pop();
+    sorted(s,temp);
+    
+    s.push(n);
+}
+void sorte(stack<int>&s){
+    
+    if(s.empty()){
+        return;
+    }
+    int temp=s.top();
+    s.pop();
+    
+    sorte(s);
+    
+    sorted(s,temp);
+    
+    
+}
+void SortedStack :: sort()
+{
+   //Your code here
+   
+   
+   sorte(s);
+   
+}
+
+
+
+Expected Time Complexity: O(N*N)
+Expected Auxilliary Space: O(N) recursive.
