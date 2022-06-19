@@ -1,0 +1,23 @@
+bool isRotated(string str1, string str2)
+    {
+        // Your code here
+        
+        string anti ="";
+        string cloc="";
+        
+        if(str1.length()!=str2.length()){
+            return false;
+        }
+        if(str1.length()<2){
+            return str1.compare(str2)==0;
+        }
+        
+        anti =str2.substr(str2.length()-2,2)+str2.substr(0,str2.length()-2);
+        cloc=str2.substr(2,str2.length()-2)+str2.substr(0,2);
+        // bool l1=str1.compare(anti)==0;
+        // bool l2=str1.compare(cloc)==0;
+        return str1.compare(anti)==0|| str1.compare(cloc)==0;
+    }
+    
+Expected Time Complexity: O(N).
+Expected Auxilary Complexity: O(N).
