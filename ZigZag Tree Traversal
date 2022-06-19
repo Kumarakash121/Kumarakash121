@@ -1,0 +1,46 @@
+ vector <int> zigZagTraversal(Node* root)
+    {
+    	// Code here
+    	vector<int>ans;
+    	queue<Node*>q;
+    	q.push(root);
+    	int flag=0;
+    	while(!q.empty()){
+    	    int n=q.size();
+    	    vector<int>temp;
+    	    while(n--){
+    	    Node* node=q.front();
+    	    q.pop();
+    	    
+    	    if(node->left){
+    	        q.push(node->left);
+    	    }
+    	    if(node->right){
+    	        q.push(node->right);
+    	    }
+    	    
+    	    temp.push_back(node->data);
+    	    
+    	    }
+    	    if(flag){
+    	        reverse(temp.begin(),temp.end());
+    	        for(int i=0;i<temp.size();i++){
+    	            ans.push_back(temp[i]);
+    	        }
+    	        
+    	    }
+    	    else{
+    	         for(int i=0;i<temp.size();i++){
+    	            ans.push_back(temp[i]);
+    	        }
+    	    }
+    	    
+    	    flag=!flag;
+    	}
+    	return ans;
+    }
+    
+    
+    
+    Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(N).
