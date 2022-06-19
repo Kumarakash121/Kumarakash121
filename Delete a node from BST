@@ -1,0 +1,47 @@
+Node *deleteNode(Node *root, int X) {
+    // your code goes here
+    
+    if(root==NULL){
+        return root;
+    }
+    if(root->data==X){
+        if(!root->left && !root->right){
+            delete root;
+            return NULL;
+        }
+        if(!root->left && root->right){
+            Node* temp=root->right;
+            delete root;
+            return temp;
+        }
+        if(root->left && !root->right){
+            Node* temp=root->left;
+            delete root;
+            return temp;
+        }
+       else if(root->left && root->right){
+          Node* temp=root->right;
+          while(temp->left!=NULL){
+              temp=temp->left;
+          }
+          root->data=temp->data;
+          root->right=deleteNode(root->right,temp->data);
+          return root;
+        }
+        
+    }
+    else if(root->data>X){
+        root->left=deleteNode(root->left,X); 
+        return root;
+    }
+    else if(root->data<X){
+        root->right=deleteNode(root->right,X); 
+        return root;
+    }
+    // return root;
+}
+
+
+Expected Time Complexity: O(Height of the BST).
+Expected Auxiliary Space: O(Height of the BST).
+ 
