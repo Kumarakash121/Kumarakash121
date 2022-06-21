@@ -1,0 +1,88 @@
+int dp[1001][1001];
+    bool interleave(string A, string B, string C,int i,int j){
+        
+        if(i==A.length() && j==B.length()){
+            return true;
+        }
+        if(dp[i][j]!=-1){
+            if(dp[i][j]==0){
+                return false;
+            }
+            else{
+                return false;
+            }
+        }
+            
+        if(A[i]==C[i+j]){
+            bool f1=interleave(A,B,C,i+1,j);
+            dp[i][j]=f1==true?1:0;
+            if(f1){
+                return true;
+            }
+        }
+        if(B[j]==C[i+j]){
+            bool f2=interleave(A,B,C,i,j+1);
+            dp[i][j]=f2==true?1:0;
+            if(f2){
+                return true;
+            }
+        }
+        dp[i][j]=0;
+        return false;
+    }
+    bool isInterleave(string A, string B, string C) 
+    {
+        //Your code here
+        memset(dp,-1,sizeof(dp));
+        return interleave(A,B,C,0,0);
+    }
+TC =O(N2)
+SC -O(N2)
+
+
+
+
+bool dp[1001][1001];
+    bool interleave(string A, string B, string C){
+        
+        for(int i=0;i<=A.length();i++){
+            for(int j=0;j<=B.length();j++){
+                if(i==0 && j==0){
+                    dp[i][j]=true;
+                }
+                else if(i==0){
+                    dp[i][j]=(B[j-1]==C[i+j-1])?dp[i][j-1]:false;
+                }
+                else if(j==0){
+                    
+               dp[i][j]=(A[i-1]==C[i+j-1])?dp[i-1][j]:false;
+                }
+                
+                else{
+                    if(A[i-1]==C[i+j-1]){
+                        dp[i][j]=dp[i-1][j];
+                        
+                    }
+                    if(!dp[i][j] && B[j-1]==C[i+j-1]){
+                        dp[i][j]=dp[i][j-1];
+                    }
+                        
+                }
+            }
+        }
+        return dp[A.length()][B.length()];
+        
+        
+    }
+    bool isInterleave(string A, string B, string C) 
+    {
+        //Your code here
+        if(A.length()+B.length()!=C.length()){
+            return false;
+        }
+        memset(dp,false,sizeof(dp));
+        return interleave(A,B,C);
+    }
+    
+   Expected Time Complexity: O(N * M)
+Expected Auxiliary Space: O(N * M)
