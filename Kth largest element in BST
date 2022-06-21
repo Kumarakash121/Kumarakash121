@@ -1,0 +1,77 @@
+int kthLargest(Node *root, int K)
+    {
+        //Your code here
+        if(root==NULL){
+            return -1;
+        }
+      int left= kthLargest(root->right,K);
+        if(left!=-1){
+            return left;
+            }
+        count++;
+        if(count==K){
+            return root->data;
+        }
+        return kthLargest(root->left,K);
+        
+        }
+        
+        TC -O(N)
+        SC-O(N)
+        
+        
+        
+        
+         int count=0;
+    
+    
+    Node* morris(Node* root,int K){
+        
+        Node* curr=root;
+        
+        while(curr!=NULL){
+            
+            if(curr->right==NULL){
+                
+                count++;
+                if(count==K){
+                    return curr;
+                }
+                curr=curr->left;
+            }
+            else{
+                Node* temp=curr->right;
+                while(temp->left!=NULL && temp->left!=curr){
+                    temp=temp->left;
+                    
+                }
+                if(temp->left==NULL){
+                    temp->left=curr;
+                    curr=curr->right;
+                }
+                // curr=curr->right;
+            else{
+                temp->left=NULL;
+                 count++;
+                if(count==K){
+                    return curr;
+                }
+                curr=curr->left;
+            }
+            }
+        }
+    }
+    int kthLargest(Node *root, int K)
+    {
+        //Your code here
+        
+    
+    Node* ans=morris(root,K);
+    return ans->data;
+    }
+    
+    
+    TC  -O(N)
+    SC-O(1)
+    
+    
