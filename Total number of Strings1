@@ -1,0 +1,35 @@
+int no_ofString(int n){
+   	    // Code here
+   	  // if all as
+//   	  unsigned long m= 1000000007;
+//   unsigned long ans=1+2*(n%m)+((n%m)*((n%m)-1)*((n%m)+1)/2);
+//   return ans%m;
+   	  long long int c=1;
+   	  //if 1b or 1c
+   	  long long int p=n%100000007;
+   	  c+=(2*p);
+   	  //if 2cs
+   	  if(n>=2){
+   	  c+=((p*(p-1))/2);
+   	  //if 1 b and 1c
+   	  c+=((p*(p-1)));
+   	  }
+   	 
+   	 
+   	 
+   	  //if 1b and 2cs
+   	  
+   	  if(n>=3){
+   	  c+=((p*(p-1)*(p-2))/2);
+   	  }
+   	  
+   	  
+   	  return c%(1000000007);
+   	  
+   	  
+   	  
+   	}    
+    
+    
+    formula of perm-n!/n1!*n2!
+    permutation with repetitions
