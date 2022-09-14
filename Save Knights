@@ -1,0 +1,31 @@
+long long saveKnights(int n) {
+        // code here
+        
+         if (n == 1) {
+
+  // If yes, then simply print total blocks
+  // which will be the max of row or column
+  return  n;
+ }
+
+ // Check for corner case #2
+ // If row or column is 2
+ else if ( n == 2) {
+
+  // If yes, then simply calculate
+  // consecutive 2 rows or columns
+ return 4;
+ }
+
+ // For general case, just print the
+ // half of total blocks
+ else {
+     return (pow(n,2)+1)/2;
+     
+ }
+    }
+    
+    
+    
+    Expected Time Complexity: O(1)
+Expected Auxiliary Space: O(1)
