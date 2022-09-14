@@ -1,0 +1,19 @@
+ int minSquares(long long l, long long b)
+    {
+        int ans=0;
+        while(l>1 && b>1)
+        {
+            if(l==b)
+                return ++ans;
+            if(l<b)
+                swap(l,b);
+            ans+=(l/b)%1000000007;(find no of big squares)
+            l=l%b;
+        }
+        ans+=(l*b)%1000000007;(if remaining length)ex-1*4
+        return ans;
+    }
+    
+    
+    
+    
