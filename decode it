@@ -1,0 +1,63 @@
+ char decodeIt(string str, int k)
+    {
+        // Write your code here
+       
+
+
+ int n=str.length();
+       string s="";
+ for(int i=0; i<n; i++)
+       {
+           if(str[i]>='a' && str[i]<='z')
+           {
+               s=s+str[i];
+         
+           }
+           else
+           {
+               int x=str[i]-'0';
+              
+               string s2="";
+               //s2+=s;
+               
+               while(x--)
+               {
+                   s2=s2+s;
+               }
+               s="";
+               s+=s2;
+               
+           }
+       }
+       return s[k-1];
+    
+    }
+    
+    
+    
+    
+    jon2snow3
+    i=0;
+    
+    dryrun
+    s=jon
+    
+    at i=3 s[i]=2
+    then create a new string and add s string to it s[i] times
+    s2=jonjon 
+    then make s empty 
+    s=s2;
+    s=jonjon
+    similarly 
+    s=jonjonsnow
+    
+    at i=8
+    s[i]=3
+    then create a new string and add s string to it s[i] times
+    s2=jonjonsnowjonjonsnowjonjonsnow
+    then make s empty 
+    s=s2;
+   then original string in s
+   as s=jonjonsnowjonjonsnowjonjonsnow
+    
+    
