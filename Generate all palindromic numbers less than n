@@ -1,0 +1,39 @@
+ int create (int in,int b,int isodd){
+        
+        int n=in;
+        int pal=in;
+        
+        if(isodd){
+            n/=b;
+            
+        }
+        while(n>0){
+            pal=pal*b+(n%b);
+            n/=b;
+        }
+        return pal;
+    }
+    int palindromicNumbers(int N)
+    {
+        // Write Your Code here
+        int count=0;
+        for(int j=0;j<2;j++){
+            int num;
+            int i=1;
+            while((num=create(i,10,j%2))<N){
+                
+                count++;
+                i++;
+            }
+        }
+        return count;
+    }
+    
+    
+    Efficient Approach: We start from 1 and create palindromes of odd digit and even digits up to n. For every number (starting from 1), we append its reverse at end if we need even length palindrome numbers. For odd length palindrome, we append reverse of all digits except last one. 
+    
+    123->123321(for even ) and 12321(for odd)
+    1 ->11(for even) and 1(for odd)
+    
+    Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(N)
