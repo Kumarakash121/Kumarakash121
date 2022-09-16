@@ -1,0 +1,39 @@
+vector<int> getStarAndSuperStar(int arr[], int n) {
+    // code here   
+    
+    vector<int>ans;
+    int star=arr[n-1];
+    
+    ans.push_back(star);
+    for(int i=n-2;i>=0;i--){
+        if(arr[i]>star){
+            ans.push_back(arr[i]);
+            star=arr[i];
+            
+        }
+        
+    }
+    int ma=INT_MIN;
+    for(int i=0;i<n;i++){
+        ma=max(ma,arr[i]);
+        
+    }
+    int c=count(arr,arr+n,ma);
+    if(c>1){
+        ans.push_back(-1);
+        
+    }
+    else{
+        ans.push_back(ma);
+    }
+    reverse(ans.begin(),ans.end());
+    
+    return ans;
+}
+
+
+
+Start with the last element, assign it to “star” and if any element found greater than star, update “star” and push it in result. Now count the maximum element of the array if it is occuring more than once then push -1 else push the maximum value. 
+
+ Expected Time Complexity: O(n)
+Expected Auxiliary Space: O(1)
