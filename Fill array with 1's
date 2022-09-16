@@ -1,0 +1,117 @@
+Fill array with 1's
+EasyAccuracy: 28.68%Submissions: 1031Points: 2
+Given an array of 0 and 1. In how many iterations it is possible that the whole array can be filled with 1's, if in a single iteration immediate neighbours of 1's 
+can be filled.
+
+ 
+
+Example 1:
+
+Input:
+n = 4
+a[] = {1, 0, 1, 0}
+Output:
+1
+Explanation:
+Both the 0s has 1 as their immediate neighbour.
+So, only one iteration is required to fill the
+array with 1.
+
+
+
+
+Case 1 : A block of 0s has 1s on both sides
+
+Let count_zero be the count of zeros in the block.
+
+Number of iterations are always equal to : 
+              count_zero/2   if (count_zero is even)
+              count_zero+1)/2    if(count_zero is odd).
+
+Case 2 : Either single 1 at the end or in 
+         the starting. For example 0 0 0 0 1 and 
+         1 0 0 0 0
+In this case the number of iterations required will 
+always be equal to number of zeros.
+
+Case 3 : There are no 1s (Array has only 0s)
+In this case array can't be filled with all 1's. 
+So print -1.
+Algorithm : 
+
+1-Start traversing the array.
+  (a) Traverse until a 0 is found.
+     while (i < n && a[i] == 1)
+     {
+        i++;
+        flag=true;
+     }
+   Flag is set to true just to check at 
+   the last if array contains any 1 or not.
+
+  (b) Traverse until a 1 is found and Count 
+     contiguous 0 .
+     while (i < n && a[i] == 0)
+     {
+         count_zero++;
+         i++;
+     }
+
+  (c) Now check which case is satisfied by 
+     current subarray. And update iterations 
+
+
+
+
+
+
+int minMoves(int a[], int n)
+{
+    
+    
+    
+    bool onef=false;
+    int i=0;
+    int res=INT_MIN;
+    while(i<n){
+        if(a[i]==1){
+            onef=true;
+        }
+        
+        while(i<n && a[i]==1){
+            i++;
+        }
+        int count_zero=0;
+        while(i<n && a[i]==0){
+            count_zero++;
+            i++;
+        }
+        if(onef==false && i==n){
+            return -1;
+        }
+        int curr;
+        if(i<n && onef==true){
+            if(count_zero%2==0){
+                curr=count_zero/2;
+            }
+            else{
+                curr=(count_zero+1)/2;
+                
+        }
+        }
+        else{
+            curr=count_zero;
+           
+        }
+        res=max(res,curr);
+        
+    }
+    return res;
+}
+
+
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+ 
