@@ -1,0 +1,62 @@
+Chocolate Station
+EasyAccuracy: 50.05%Submissions: 925Points: 2
+Geek has an array Arr, where Arr[i] (1-based indexing) denotes the number of chocolates corresponding to each station. When he moves from station i to station i+1 
+he gets A[i] -A[i+1] chocolates for free, if this number is negative, he looses that many chocolates also.
+He can only move from station i to station i+1, if he has non-negative number of chocolates with him.
+Given the cost of one chocolate Rs. P. Find the minimum cost incurred in reaching last station from the first station (station 1).
+Note: Initially Geek has 0 chocolates.
+
+ 
+
+Example 1:
+
+Input:
+N=3, price=10
+arr[] = { 1, 2, 3 }
+Output:  30
+Explanation: 
+To reach the first station from the starting
+point, we need to buy 1 chocolate,To reach 
+station 2 form station 1, we get A[1]-  A[2]
+= -1 chocolates i.e. we lose 1 chocolate. 
+Hence, we need to buy 1 chocolate.Similarly, 
+we need to buy 1 chocolate to reach station 3
+from station 2.
+Hence, total cost incurred = (1+1+1)*10 = 30
+ 
+
+
+Approach : 
+1. Initialize choc_buy with the first element of array and curr_choc =0. 
+2. Add arr[i]-arr[i+1] to curr_choc for every i. 
+a) Check if curr_choc becomes negative. 
+choc_buy += abs(arr[i]- arr[i+1]) 
+curr_choc = 0 
+3. Return choc_buy * p.
+
+
+int getChocolateCost(vector<int> arr, int chocolateMrp)
+    {
+        // code here
+        int n=arr.size();
+        int buy=arr[0];
+        //cout<<buy<<" ";
+        int balance=0;
+        int i=0;
+        while(i<=n-2){
+            balance+=(arr[i]-arr[i+1]);
+            if(balance<0){
+                
+                buy+=(abs(balance));
+                balance=0;
+            }
+            i++;
+        }
+        //cout<<buy<<" ";
+        return buy*chocolateMrp;
+    }
+    
+    
+    
+    Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1).
