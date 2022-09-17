@@ -1,0 +1,73 @@
+Prime number of set bits
+EasyAccuracy: 66.77%Submissions: 1203Points: 2
+Given two integers L and R, write a program that finds the count of numbers having prime number of set bits in their binary representation in the range [L, R].
+
+Example 1:
+
+Input: L = 6, R = 10
+Output: 4
+Explanation: 6, 7, 9, 10 having
+prime set bits between 6 and 10. 
+
+Example 2:
+
+Input: L = 10, R = 15
+Output: 5
+Explanation: 10, 11, 12, 13, 14 having
+prime set bits between 10 and 15.
+
+
+Explanation: In this program we find a total number, that’s having prime number of set bit. so we use a CPP predefined function __builtin_popcount() these functions 
+provide a total set bit in number. as well as be check the total bit’s is prime or not if prime we increase the counter these process repeat till given range. 
+
+
+
+
+
+
+bool prime(int p){
+        if(p==2 ){
+            return true;
+        }
+        if(p==1){
+            return false;
+        }
+        for(int i=2;i<=sqrt(p);i++){
+            if(p%i==0){
+                return false;
+            }
+        }
+        return true;
+    }
+    int primebits(int x){
+        int count=0;
+        while(x>0){
+            if(x&1){
+                count++;
+            }
+            x>>=1;
+            // cout<<x<<' ';
+        }
+        // cout<<count<<"" <<endl;
+       if(prime(count)){
+           return 1;
+       } 
+       else{
+           return 0;
+       }
+    }
+    int primeSetBits(int L, int R){
+        // code here
+        int cnt=0;
+        for(int i=L;i<=R;i++){
+            if(primebits(i)){
+                cnt++;
+            }
+        }
+        return cnt;
+        
+    }
+    
+    
+    Time Complexity : Let’s n = (r-l) 
+so overall time complexity is N*sqrt(N)
