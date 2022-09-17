@@ -1,0 +1,73 @@
+Numbers with same first and last digit
+EasyAccuracy: 40.5%Submissions: 1295Points: 2
+Given a range of numbers starting with integer L and ending at R, the task is to count the numbers which have same first and last digits.
+
+ 
+
+Example 1:
+
+Input:
+L = 7 
+R = 68
+Output:
+9
+Explanation:
+Number with the same 
+first and last digits 
+in the given range is:
+[7, 8, 9, 11, 22, 33, 
+44 ,55, 66].
+
+
+ we can observe that in each ten number span we have only one number which has the given property except 1 to 10 which has 9 numbers (all one-digit numbers) having 
+ the same starting and ending digit. 
+Using above property we can solve given problem, first we break the given interval into two parts that is if interval is l to r, we break this into 1 to l and 1 to r,
+our answer is obtained by subtracting result of first query from second query. 
+Now we remain to find the count of numbers with given property in range 1 to x, for this, we divide x by 10, which gives the number of 10-spans. We add 9 to the span
+for taking one-digit numbers into account. If the last digit of x is smaller than the first digit of x, then 1 should be decreased in the final answer to discard the 
+last ten span number because that number is out of range. 
+
+
+
+
+
+
+
+
+
+
+
+
+int count(int x){
+      
+      if(x<10){
+          return x;
+      }
+      int tens=x/10;
+      int res=tens+9;
+      
+      int p=x;
+      while(p>=10){
+          p/=10;
+          }
+      int last =x%10;
+      if(last<p){
+          res--;
+      }
+      return res;
+      
+  }
+    int numbersInRange(int L, int R){
+        // code here 
+        
+        if(L>R){
+            return 0;
+        }
+        return count(R)-count(L-1);
+        
+    }
+    
+    
+    Time Complexity: O(log10N)
+
+Auxiliary Space: O(1)
