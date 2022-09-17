@@ -1,0 +1,96 @@
+
+Count the elements
+EasyAccuracy: 58.75%Submissions: 1595Points: 2
+Given two arrays a and b. Given q queries each having a positive integer i denoting an index of the array a. For each query, your task is to find all the elements
+less than or equal to qi in the array b.
+
+Example 1:
+
+Input:
+N=6
+a[] = {1, 2, 3, 4, 7, 9}
+b[] = {0, 1, 2, 1, 1, 4} 
+Query 1 -> 5
+Query 2 -> 4
+Output : 6
+         6
+Explanation: For 1st query, the given index is 5,
+             A[5] is 9 and in B all the elements 
+             are smaller than 9.
+             For 2nd query, the given index is 4, 
+             A[4] is 7 and in B all the elements 
+             are smaller than 7.  
+
+
+
+
+
+
+
+
+
+take every element of query and compare it with every element of b array and calculate count and push it into the vector
+vector<long long> find(vector<long long> a,vector<long long> b,vector<long long> q) {
+       
+       
+       int n=q.size();
+       int i=0;
+       vector<long long >v;
+       
+       while(i<n){
+           int x=a[q[i]];
+           int cnt=0;
+           for(int i=0;i<b.size();i++){
+               if(x>=b[i]){
+                   cnt++;
+               }
+           }
+           v.push_back(cnt);
+           i++;
+       }
+       return v;
+}
+
+
+T,C-O(N*M)
+S.C-O(1)
+
+
+
+
+
+first find maximum element in 1st array and make a array of size max+1 and every value of index of array denotes that no of elements smaller than that index no
+and finally ans it according to queries
+
+vector<long long> find(vector<long long> a,vector<long long> b,vector<long long> q) {
+       
+       vector<long long>v;
+       int max=INT_MIN;
+       for(int i=0;i<a.size();i++){
+           if(a[i]>max){
+               max=a[i];
+               
+           }
+       }
+    //   cout<<max<<" ";
+      int c[max+1]={0};
+      for(int i=0;i<b.size();i++){
+          if(b[i]<=max){
+          c[b[i]]++;
+          }
+      }
+      for(int i=1;i<=max;i++){
+          c[i]=c[i-1]+c[i];
+           
+      }
+    
+      for(int i=0;i<q.size();i++){
+          v.push_back(c[a[q[i]]]);
+      }
+   
+     return v;
+}
+
+
+T.C-O(N)
+S.C-O(1)
