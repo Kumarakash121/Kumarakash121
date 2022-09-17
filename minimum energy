@@ -1,0 +1,62 @@
+
+Minimum Energy
+EasyAccuracy: 44.48%Submissions: 1356Points: 2
+Given an array containing positive and negative numbers. The array represents checkpoints from one end to other end of street. Positive and negative values represent 
+amount of energy at that checkpoint. Positive numbers increase the energy and negative numbers decrease. Find the minimum initial energy required to cross the street 
+such that Energy level never becomes 0 or less than 0.
+
+Note :  The value of minimum initial energy required will be 1 even if we cross street successfully without loosing energy to less than and equal to 0 at any
+checkpoint. The 1 is required for initial check point.
+
+ 
+
+Example 1:
+
+Input
+N = 5
+A[] = {4, -10, 4, 4, 4}
+Output
+7
+Explanation
+By having an initial energy of 7 we can
+make sure that all the checkpoints are
+visited and the fuel never reaches 0
+or less value.
+
+
+We take initial minimum energy 0 i.e; initMinEnergy = 0 and energy at any checkpoint as currEnergy = 0. Now traverse each checkpoint linearly and add energy level 
+at each i’th checkpoint i.e; currEnergy = currEnergy + arr[i]. If currEnergy becomes non-positive, then we need at least “abs(currEnergy) + 1” extra initial energy
+to cross this point. Therefore we update initMinEnergy = (initMinEnergy + abs(currEnergy) + 1). We also update currEnergy = 1 as we now have the required extra 
+minimum initial energy for next point.
+
+
+
+
+
+
+int minEnergy(int a[], int n)
+    {
+        // Your code goes here
+        int final=0;
+        int curr=0;
+        bool flag=0;
+        for(int i=0;i<n;i++){
+            curr+=a[i];
+            
+            if(curr<=0){
+                
+            final+=abs(curr)+1;
+            curr=1;
+            flag=1;
+        }
+        }
+        
+        return flag==0?1:final;
+        
+    }
+    
+    
+    
+    
+    Time Complexity : O(n) 
+Auxiliary Space : O(1)
