@@ -1,0 +1,51 @@
+Row with minimum number of 1's
+EasyAccuracy: 53.21%Submissions: 2182Points: 2
+Given a 2D binary matrix A of dimensions NxM, determine the row that contains a minimum number of 1's.
+Note-The matrix contains only 1s and 0s. Also, if two or more rows contain the minimum number of 1's, the answer is the lowest of those indices.
+
+Example 1:
+
+Input:
+N=4,M=4
+A=[[1,1,1,1],[1,1,0,0],[0,0,1,1],[1,1,1,1]]
+Output:
+2
+Explanation:
+Rows 2 and 3 contain the minimum number 
+of 1's(2 each).Since, 2 is less than 3.
+Thus, the answer is 2.
+
+
+
+count the number of 1s in every row
+and update the minimum count
+
+
+int minRow(int N, int M, vector<vector<int>> A) {
+        // code here
+        int min=INT_MAX;
+        int row;
+        for(int i=0;i<N;i++){
+            int cnt=0;
+            for(int j=0;j<M;j++){
+                if(A[i][j]==1){
+                    cnt++;
+                }
+            }
+            if(cnt<min){
+                min=cnt;
+                row=i+1;
+            }
+        }
+        return row;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    Expected Time Complexity:O(N*M)
+Expected Auxillary Space:O(1)
