@@ -1,0 +1,39 @@
+Common Subsequence
+EasyAccuracy: 67.32%Submissions: 2011Points: 2
+Given two strings a and b. Check whether they contain any common subsequence (non empty) or not.
+
+Example 1:
+
+Input:
+a = "ABEF" b = "CADE"
+Output: 1
+Explanation: Subsequence "AE" occurs
+in both the strings.
+
+
+
+if any element of a is found in b then return true
+else return false string::npos represents the end of string 
+
+
+
+
+
+bool commonSubseq (string a, string b)
+	{
+	    // your code here
+	    
+	    
+	    
+	    for(int i=0;i<a.size();i++){
+	        
+	        if(b.find(a[i])!=string::npos){
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+  
+  Expected Time Complexity: O(|a| + |b|).
+Expected Auxiliary Space: O(1).
+
