@@ -1,0 +1,78 @@
+Print matrix in diagonal pattern
+EasyAccuracy: 57.04%Submissions: 3463Points: 2
+Given a matrix M of n*n size, the task is to complete the function which prints its elements in a diagonal pattern as depicted below.
+ 
+
+
+ 
+
+Example 1:
+
+Input:
+N = 3
+mat[][] = {{1 2 3},{4 5 6},{7 8 9}}
+Output: 1 2 4 7 5 3 6 8 9
+
+
+
+
+Create variables i=0, j=0 to store the current indices of row and column
+Run a loop from 0 to n*n, where n is side of the matrix.
+Use a flag isUp to decide whether the direction is upwards or downwards. Set isUp = true initially the direction is going upward.
+If isUp = 1 then start printing elements by incrementing column index and decrementing the row index.
+Similarly if isUp = 0, then decrement the column index and increment the row index.
+Move to the next column or row (next starting row and column
+Do this till all the elements get traversed.
+
+
+ vector<int> matrixDiagonally(vector<vector<int>>&mat)
+    {
+         //Your code here
+         
+         int i=0;
+         int j=0;
+         vector<int>ans;
+         int n=mat[0].size();
+         bool up=true;
+         for(int k=0;k<n*n;){
+             if(up){
+                 for(;i>=0 && j<n;j++,i--){
+                     ans.push_back(mat[i][j]);
+                     k++;
+                 }
+                 if(i<0 && j<=n-1){
+                     i=0;
+                 }
+                 if(j==n){
+                     i=i+2;
+                     j--;
+                 }
+             }
+             else{
+                 
+                 
+                 for(;i<n && j>=0;i++,j--){
+                     ans.push_back(mat[i][j]);
+                     k++;
+                 }
+                 if(j<0 && i<=n-1){
+                     j=0;
+                 }
+                 if(i==n){
+                     j=j+2;
+                     i--;
+                 }
+             }
+             
+             up=!up;
+         }
+         return ans;
+    }
+    
+    
+    Complexity Analysis: 
+
+Time Complexity: O(n*n). 
+To traverse the matrix O(n*n) time complexity is needed.
+Auxiliary Space: O(1). 
+As no extra space is required.
