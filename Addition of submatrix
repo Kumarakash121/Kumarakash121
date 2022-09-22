@@ -1,0 +1,110 @@
+Addition of submatrix
+EasyAccuracy: 83.65%Submissions: 3602Points: 2
+Given a matrix Arr of size N x M. You are given position of submatrix as X1, Y1 and X2, Y2 inside the matrix. Find the sum of all elements inside that submatrix. Here X1, Y1, X2, Y2 are 1-based.
+
+Example 1:
+
+Input: 
+N = 5 , M = 6
+Arr[][] = {{1, 2, 3, 4, 5, 6},
+           {7, 8, 9, 10, 11, 12},
+           {13, 14, 15, 16, 17, 18},
+           {19, 20, 21, 22, 23, 24},
+           {25, 26, 27, 28, 29, 30}}
+X1=3, Y1=4, X2=4, Y2=5
+Output: 78
+Explanation: Sum from cell starting at
+position (3, 4) (1-based indexing) and 
+ending at (4, 5) is 78.
+
+
+
+
+
+
+
+
+
+long long subMatrixSum(vector<int> arr[], int n, int m, int x1, int y1, int x2,
+	                       int y2) {
+	    // code here
+	    long long sum=0;
+	    for(int i=x1-1;i<x2;i++){
+	        for(int j=y1-1;j<y2;j++){
+	            sum+=(arr[i][j]);
+	        }
+	    }
+	    return sum;
+	}
+  
+  
+  tc-o(n^2)
+  
+  
+  submatrix sum queries
+  
+  
+  Given a matrix of size M x N, there are large number of queries to find submatrix sums. Inputs to queries are left top and right bottom indexes of submatrix whose 
+  sum is to find out. 
+How to preprocess the matrix so that submatrix sum queries can be performed in O(1) time.
+Example : 
+ 
+
+tli :  Row number of top left of query submatrix
+tlj :  Column number of top left of query submatrix
+rbi :  Row number of bottom right of query submatrix
+rbj :  Column number of bottom right of query submatrix
+
+Input: mat[M][N] = {{1, 2, 3, 4, 6},
+                    {5, 3, 8, 1, 2},
+                    {4, 6, 7, 5, 5},
+                    {2, 4, 8, 9, 4} };
+Query1: tli = 0, tlj = 0, rbi = 1, rbj = 1
+Query2: tli = 2, tlj = 2, rbi = 3, rbj = 4
+Query3: tli = 1, tlj = 2, rbi = 3, rbj = 3;
+
+Output:
+Query1: 11  // Sum between (0, 0) and (1, 1)
+Query2: 38  // Sum between (2, 2) and (3, 4)
+Query3: 38  // Sum between (1, 2) and (3, 3)
+We strongly recommend you to minimize your browser and try this yourself first.
+The idea is to first create an auxiliary matrix aux[M][N] such that aux[i][j] stores sum of elements in submatrix from (0,0) to (i,j). Once aux[][] is constructed, we can compute sum of submatrix between (tli, tlj) and (rbi, rbj) in O(1) time. We need to consider aux[rbi][rbj] and subtract all unnecessary elements. Below is complete expression to compute submatrix sum in O(1) time.
+ 
+
+Sum between (tli, tlj) and (rbi, rbj) is,
+   aux[rbi][rbj] - aux[tli-1][rbj] - 
+   aux[rbi][tlj-1] + aux[tli-1][tlj-1]
+
+The submatrix aux[tli-1][tlj-1] is added because  
+elements of it are subtracted twice.
+Illustration: 
+ 
+
+mat[M][N] = {{1, 2, 3, 4, 6},
+             {5, 3, 8, 1, 2},
+             {4, 6, 7, 5, 5},
+             {2, 4, 8, 9, 4} };
+
+We first preprocess the matrix and build
+following aux[M][N]
+aux[M][N] = {1,  3,   6,  10, 16}
+            {6,  11,  22, 27,  35},
+            {10, 21,  39, 49,  62},  
+            {12, 27,  53, 72,  89} }
+
+Query : tli = 2, tlj = 2, rbi = 3, rbj = 4  
+      
+Sum between (2, 2) and (3, 4) = 89 - 35 - 27 + 11
+                              = 38
+         
+How to build aux[M][N]? 
+1. Copy first row of mat[][] to aux[][] 
+2. Do column wise sum of the matrix and store it. 
+3. Do the row wise sum of updated matrix aux[][] in step 2.
+Below is the program based on above idea.
+ 
+
+
+  
+  
+  
