@@ -1,0 +1,103 @@
+Flip Bits
+EasyAccuracy: 40.18%Submissions: 3165Points: 2
+Given an array A[] consisting of 0’s and 1’s. A flip operation is one in which you turn 1 into 0 and a 0 into 1. You have to do at most one “Flip” operation of any 
+subarray. Formally, select a range (l, r) in the array A[], such that (0 ≤ l ≤ r < n) holds and flip the elements in this range to get the maximum ones in the final 
+array. You can possibly make zero operations to get the answer.
+
+ 
+
+Example 1:
+
+Input:
+N = 5
+A[] = {1, 0, 0, 1, 0} 
+Output:
+4
+Explanation:
+We can perform a flip operation in the range [1,2]
+After flip operation array is : [ 1 1 1 1 0 ]
+Count of one after fliping is : 4
+[Note: the subarray marked in bold is the flipped subarray]
+
+
+
+initially count number of 1s in array 
+try for every subarray and find maximum value of count0-count1 in all subarrays 
+max value indicate that maximum 1s can be increased in any subarray
+total count after flipping is count of 1s+max value
+
+
+
+
+int maxOnes(int a[], int n)
+    {
+        // Your code goes here
+        int res=0;
+        int count=0;
+        for(int i=0;i<n;i++){
+            if(a[i]==1){
+                count++;
+            }
+            int c0=0;
+            int c1=0;
+            for(int j=i;j<n;j++){
+                (a[j]==1)?c1++:c0++;
+                res=max(res,c0-c1);
+            }
+            
+        }
+       
+        return count+res;
+    }
+    
+    
+    T.C-O(n^2)
+    S.C-O(1)
+    
+    
+    
+    
+    II-
+    
+    
+    when we flip a 1 then value decreased by -1 and 0 increased by +1;
+    
+    for ex-
+    [ 1 1 1 1 0 ]
+    -1 -1 -1 -1 1
+    so the problem reduces to maximum subarray sum in flipped subarray 
+    which indicates maximum 1s incresed  after flipping 
+    so total 1s after flipping count of 1s+maximum subarray sum
+    
+    
+    
+    
+    int maxOnes(int a[], int n)
+    {
+        // Your code goes here
+       
+        int curr=0;
+        int res=0;
+        int count=0;
+        for(int i=0;i<n;i++){
+            
+            if(a[i]==1){
+                curr-=1;
+                count++;
+            }
+           else if(a[i]==0){
+               curr+=1;
+           }
+           if(res<curr){
+               res=curr;
+               
+           }
+           if(curr<0){
+               curr=0;
+           }
+        }
+        return count+res;
+    }
+    
+    T.C-O(N)
+    S.C-O(1)
