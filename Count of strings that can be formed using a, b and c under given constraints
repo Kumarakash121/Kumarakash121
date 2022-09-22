@@ -1,0 +1,73 @@
+Count of strings that can be formed using a, b and c under given constraints
+EasyAccuracy: 68.61%Submissions: 3599Points: 2
+Given a length n, count the number of strings of length n that can be made using ‘a’, ‘b’ and ‘c’ with at-most one ‘b’ and two ‘c’s allowed.
+
+Example 1:
+
+Input: n = 1
+Output: 3
+Explanation: Possible strings are: "a",
+"b" and "c"
+
+
+
+I-
+recursively calculate all possible combinations 
+make three calls one for include a one for b one for c
+if n==0 then we return count 1;
+if countb==0 && count c==0 then return 1
+if countb<0 || countc<0 then return 0
+
+
+
+long long count (long long n,int cb,int cc){
+    if(cb<0 || cc<0){
+        return 0;
+    }
+    if(n==0){
+        return 1;
+    }
+    if(cb==0 && cc==0){
+        return 1;
+    }
+    
+    ans+=(count(n-1,cb,cc));
+    ans+=(count(n-1,cb-1,cc));
+    ans+=(count(n-1,cb,cc-1));
+    return ans;
+}
+
+
+Time complexity of above solution is exponential.
+
+
+
+1. if all as then 1 way
+2.if 1b or 1c  and rest a -then n+n=2n way
+3. if 2c and rest as then n(n-1)/2 way
+4.if 1b and 2c and rest a -then n(n-1)(n-2)/2
+5 if 1 b and 1c rest a then n(n-1) way
+
+
+
+long long int countStr(long long int n){
+    //complete the function here
+    
+    
+    long long ans=1;
+    
+    ans+=(2*n);
+    
+    ans+=(n*(n-1));
+    
+    ans+=(n*(n-1)*(n-2))/2;
+    
+    ans+=(n*(n-1))/2;
+    
+   
+    return ans;
+}
+
+
+Time Complexity : O(1) 
+Auxiliary Space : O(1)
