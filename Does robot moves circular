@@ -1,0 +1,97 @@
+Does robot moves circular
+EasyAccuracy: 44.04%Submissions: 2874Points: 2
+Given a sequence of moves for a robot. Check if the sequence is circular or not.
+
+A sequence of moves is circular if the first and last positions of the robot are the same. A move can be one of the following :
+    G - Go one unit
+    L - Turn left
+    R - Turn right
+
+Example 1:
+
+Input: path = "GLGLGLG"
+Output: "Circular"
+Explanation: If we start form 
+(0,0) in a plane then we will 
+back to (0,0) by the end of the 
+sequence.
+
+
+I-
+start from x=0 y=0
+if s[i]=G then we increse  the coordinates based on direction
+and based on direction if s[i]=L or R then we change our direction
+
+
+
+string isCircular(string path){
+    //complete the function here
+     int x=0;
+     int y=0;
+     bool up=true;
+     bool left=false;
+     bool down=false;
+     bool right=false;
+    for(int i=0;i<path.size();i++){
+        if(path[i]=='G'){
+            if(up==true){
+                y=y+1;
+                
+            }
+            else if(down==true){
+                
+                y=y-1;
+            }
+            else if(left==true){
+                x=x+1;
+                
+            }
+            else if(right==true){
+                x=x-1;
+            }
+            
+        }
+        else if(up==true){
+            if(path[i]=='L'){
+                right=true;
+                up=false;
+            }
+            else if(path[i]=='R'){
+                left=true;
+                up=false;
+            }
+        }
+        else if(down==true){
+            if(path[i]=='L'){
+                left=true;
+                down=false;
+            }
+            else if(path[i]=='R'){
+                right=true;
+                down=false;
+            }
+        }
+        else if(left==true){
+            if(path[i]=='L'){
+                up=true;
+                left=false;
+            }
+            else if(path[i]=='R'){
+                down=true;
+                left=false;
+            }
+        }
+         else if(right==true){
+            if(path[i]=='L'){
+                down=true;
+                right=false;
+            }
+            else if(path[i]=='R'){
+                up=true;
+                right=false;
+            }
+        }
+    }
+   string s= (x==0 && y==0 )? "Circular": "Not Circular";
+   return s;
+}
