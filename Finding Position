@@ -1,0 +1,41 @@
+Finding Position
+EasyAccuracy: 61.62%Submissions: 4192Points: 2
+Some people(n) are standing in a queue. A selection process follows a rule where people standing on even positions are selected. Of the selected people a queue is formed and again out of these only people on even position are selected. This continues until we are left with one person. Find out the position of that person in the original queue.
+
+Example 1:
+
+Input: n = 5
+Output: 4 
+Explanation: 1,2,3,4,5 -> 2,4 -> 4.
+
+
+
+every time reduces numbers by half and make new position for selected numbers 
+recursively call for n/2 part and  answer of n/2 part converted to oringial position in n numbers
+1 2 3 4 5 6 =2*2
+1 2 3 4 5 6
+     ||
+     2 4 6  
+     1 2 3 =1*2
+       ||
+       4 
+       1
+     when n==1 then return 1
+     apply formula y=2*x
+     
+     
+     
+     long long int nthPosition(long long int n){
+        // code here
+        
+        if(n==1){
+            return 1;
+        }
+        long long int x=nthPosition(n/2);
+        long long int y=2*x;
+        return y;
+    }
+    
+    
+Expected Time Complexity: O(logn)
+Expected Auxiliary Space: O(1)
