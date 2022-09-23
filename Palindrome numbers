@@ -1,0 +1,45 @@
+ Palindrome numbers
+EasyAccuracy: 60.37%Submissions: 4208Points: 2
+Check if the binary representation of a number is palindrome or not.
+ 
+
+Example 1:
+
+Input:
+N = 17
+Output:
+1
+Explanation:
+(17)10 = (10001)2
+Which is pallindrome hence
+output is 1.
+ 
+ 
+ 
+ reverse the bits of the number and after reversing if reversed number is equal to original number then it is palindrome
+ 
+ int isPallindrome(long long int N){
+        // code here
+        int rev=0;
+        int c=N;
+       while(N>0){
+           rev<<=1;
+           
+           if(N&1){
+               rev^=1;
+           }
+           N>>=1;
+       }
+      
+       if(c==rev){
+           return 1;
+           
+       }
+       return 0;
+    
+    }
+    
+    t.c-O(logn)
+    s.c-O(1)
+    
+    
