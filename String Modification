@@ -1,0 +1,91 @@
+ 
+ String Modification
+EasyAccuracy: 43.75%Submissions: 4068Points: 2
+Given a string with repeated characters, the task is to complete the function rearrangeString which rearrange characters in a string so that no two adjacent characters are same.
+Note : It may be assumed that the string has only lowercase English alphabets and such transformation is always always possible.
+
+Example 1:
+
+Input:
+S = aaabc
+Output: 1
+Explanation: We can transform the string
+to abaca.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ make a priority queue of character and their frequency and make according to frequency
+ and one by one pick characters from top and add  it to the string and and reduce their frequency and if prev variable frequency >0 then  push it to the priority
+ queue and store that as a prev variable if frequency is greater than 0 and again repeat same steps till queue is not empty
+ 
+ aaabc
+ a-3         a-2
+ b-1 =>b-1 =>c-1 =>c-1 =>a-1   =>a-1
+ c-1   c-1                c-1
+ 
+ 
+ str=a  prev=a-2  prev=a-1  str=abac  str=abaca
+         str=aba  str=aba             
+ 
+ 
+ 
+ 
+ 
+ struct cmp
+{
+    bool operator()( pair<char,int> a,  pair<char,int> b) 
+    {
+       return (b.second>a.second);
+    }
+};
+    string rearrangeString(string str)
+    {
+       //Your code here.
+       
+       priority_queue<pair<char,int>,vector<pair<char,int>>,cmp>pq;
+       int count[26] = { 0 };
+ for (int i = 0; i <str.size(); i++){
+  count[str[i] - 'a']++;
+}
+ // Insert all characters with their frequencies
+ // into a priority_queue
+ 
+ for (char c = 'a'; c <= 'z'; c++) {
+  int val = c - 'a';
+  if (count[val]) {
+      
+   pq.push({ c, count[val] });
+  }
+ }
+       
+       
+       string res="";
+     
+       pair<char,int>prev={'#',-1};
+       while(pq.size()>0){
+           
+           pair<char,int>temp=pq.top();
+           pq.pop();
+          
+           res+=(temp.first);
+           temp.second--;
+           if(prev.second>0){
+               pq.push(prev);
+           }
+           
+           prev=temp;
+       }
+      
+       return res;
+    }
+    
+    
+    Expected Time Complexity: O(N * log N), N = length of the string.
+Expected Auxiliary Space: O(constant)
