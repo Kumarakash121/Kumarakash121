@@ -1,0 +1,39 @@
+Final Destination
+EasyAccuracy: 36.53%Submissions: 7934Points: 2
+Consider a 2d plane and a Robot which is located at (0,0) who can move only one unit step at a time in any direction i.e. if its initial position is (x,y), he can go
+to positions (x + 1, y), (x - 1, y), (x, y + 1) or (x, y - 1). Now Given three integers a,b (denoting the final position where the robot has to reach), and x. Find out
+if the Robot can reach the final position in exactly x steps.
+
+ 
+
+Example 1:
+
+Input:
+a = 5, b = 5, x = 11
+Output:
+0
+Explanation:
+No matter how the Robot moves,
+the Robot won't be able to reach
+point (5,5) in exactly 11 moves.
+
+
+
+
+first calculate min steps to reach destination and if x<min steps then return false else (x-minmoves)%2==0 then return true;
+
+
+  int canReach(long long a, long long b, long long x) {
+        // code here
+       long long moves=abs(a)+abs(b);
+       if(x<moves){
+           return 0;
+       }
+       
+       return (x-moves)%2==0;
+    }
+    
+    Expected Time Complexity: O(1)
+Expected Auxiliary Space: O(1)
+
+ 
