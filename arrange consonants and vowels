@@ -1,0 +1,112 @@
+
+
+if first node isba vowel then update last vowel with head
+
+else we search for first vowel and assign to the newhead and we make links of curr vowel to last vowel
+and consonants point to consonants and make a link bw consonants and vowel
+
+function for checking vowel
+
+bool isvowel(char x){
+    
+    return x=='a' || x=='e' || x=='i' || x=='o' || x=='u';
+}
+struct Node* arrange(Node *head)
+{
+   //Code here
+   Node* newhead=head;
+   Node*curr=head;
+   
+   // for keep track of vowel
+   Node* lastvowel;
+   if(head==NULL){
+       return NULL;
+       
+   }
+   // We need to discover the first vowel
+    // in the list. It is going to be the
+    // returned head, and also the initial
+    // latestVowel.
+   if(isvowel(head->data)){
+       lastvowel=head;
+   }
+   // first element is a vowel. It will
+        // also be the new head and the initial
+        // latestVowel
+        
+        
+        
+        // First element is not a vowel. Iterate
+        // through the list until we find a vowel.
+        // Note that curr points to the element
+        // *before* the element with the vowel.
+   else{
+       while(curr->next!=NULL && !isvowel(curr->next->data)){
+           curr=curr->next;
+       }
+       // This is an edge case where there are
+        // only consonants in the list.
+       if(curr->next==NULL){
+           return head;
+       }
+       
+       // Set the initial latestVowel and the
+        // new head to the vowel item that we found.
+        // Relink the chain of consonants after
+        // that vowel item:
+        // old_head_consonant->consonant1->consonant2->
+        // vowel->rest_of_list becomes
+        // vowel->old_head_consonant->consonant1->
+        // consonant2->rest_of_list
+       newhead=curr->next;
+       lastvowel=curr->next;
+       curr->next=curr->next->next;
+       lastvowel->next=head;
+       
+   }
+   
+   while(curr!=NULL && curr->next!=NULL){
+       
+       if(isvowel(curr->next->data)){
+       // If it comes directly after the
+                // previous vowel, we don't need to
+                // move items around, just mark the
+                // new latestVowel and advance curr
+           if(curr==lastvowel){
+               lastvowel=curr->next;
+               curr=curr->next;
+           }
+           else{
+           // But if it comes after an intervening
+                // chain of consonants, we need to chain
+                // the newly discovered vowel right after
+                // the old vowel. Curr is not changed as
+                // after the re-linking it will have a
+                // new next, that has not been checked yet,
+                // and we always keep curr at one before
+                // the next to check.
+                
+                
+               Node* temp=lastvowel->next;
+               // Chain in new vowel
+               lastvowel->next=curr->next;
+               // Advance latestVowel
+               lastvowel=lastvowel->next;
+               // Remove found vowel from previous place
+               curr->next=curr->next->next;
+               lastvowel->next=temp;
+               
+           }
+       }
+       else{
+           curr=curr->next;
+       }
+   }
+   return newhead;
+}
+
+
+
+TIME COMPLEXITY:- O(n)
+
+SPACE COMPLEXITY:- O(1)
