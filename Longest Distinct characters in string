@@ -1,0 +1,55 @@
+Longest Distinct characters in string
+EasyAccuracy: 48.85%Submissions: 28836Points: 2
+Lamp
+This problem is part of GFG SDE Sheet. Click here to view more.  
+
+Given a string S, find length of the longest substring with all distinct characters. 
+
+Example 1:
+
+Input:
+S = "geeksforgeeks"
+Output: 7
+Explanation: "eksforg" is the longest 
+substring with all distinct characters.
+
+
+
+approach-
+if in any window map size is not equal to window size then decrease the window till map size is not equal to window size and if any element count is 0 then erase it
+else update the max size window and increase i pointer and update the frequency of ith element and return max ans;
+
+
+ unordered_map<char,int>m;
+    
+    int i=0;
+    int j=0;
+    int n=S.size();
+    m[S[i]]++;
+    int ma=1;
+    while(i<n){
+        
+        if(m.size()!=i-j+1){
+            while(m.size()!=i-j+1){
+                m[S[j]]--;
+                if(m[S[j]]==0){
+                    m.erase(S[j]);
+                }
+                j++;
+            }
+        }
+        else{
+            ma=max(ma,i-j+1);
+        }
+        i++;
+        m[S[i]]++;
+        // i++;
+        
+    }
+    return ma;
+    
+}
+
+
+Expected Time Complexity: O(|S|).
+Expected Auxiliary Space: O(K), where K is Constant.
