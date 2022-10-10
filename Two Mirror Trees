@@ -1,0 +1,50 @@
+Two Mirror Trees
+EasyAccuracy: 49.96%Submissions: 31478Points: 2
+Given a Two Binary Trees, write a function that returns true if one is mirror of other, else returns false.
+MirrorTree1
+Input:
+T1:     1     T2:     1
+      /   \         /   \
+     2     3       3     2
+Output: 1
+
+
+Input:
+T1:     10      T2:   10
+       /  \          /  \
+      20  30        20  30
+     /  \          /  \
+    40   60       40  60
+Output: 0
+
+
+approach -
+
+if both root are null then return true and if one of the root are null then return false then go for a->left,b->right and a->right,b->left and take both answrs and and 
+return and of 
+these two values
+
+
+ int areMirror(Node* a, Node* b) {
+    // Your code here
+    
+     if(!a && !b){
+        return 1;
+    }
+    if(!a || !b){
+        return 0;
+    }
+    // if(!a && !b){
+    //     return 1;
+    // }
+    if(a->data!=b->data){
+        return 0;
+    }
+    int x= areMirror(a->right,b->left);
+    int y=areMirror(a->left,b->right);
+    return x & y;
+    }
+
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(Height of the Tree).
