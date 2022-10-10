@@ -1,0 +1,61 @@
+Check if two Nodes are Cousins
+EasyAccuracy: 43.07%Submissions: 29542Points: 2
+Given the binary Tree of and two-node values. Check whether the two-node values are cousins of each other or not.
+
+Example 1:
+
+Input:
+      1
+    /   \
+   2     3
+a = 2, b = 3
+Output: 0
+
+
+
+approach-
+
+take a queue and do a level order traversal and if at any level two given nodes are from same parent then return false and if at any level we found 
+both nodes then return true and if one of the nodes exist at any level then return false 
+
+
+bool isCousins(Node *root, int a, int b)
+{
+   //add code here.
+  int f1=0,f2=0;
+  queue<Node*>q;
+  q.push(root);
+  while(!q.empty()){
+      int n=q.size();
+      for(int i=1;i<=n;i++){
+          Node*temp=q.front();
+          q.pop();
+          if(temp->left and temp->right){
+              if(temp->left->data==a and temp->right->data==b)return false;
+              if(temp->left->data==b and temp->right->data==a)return false;
+          }
+          if(temp->data==a)f1=1;
+          if(temp->data==b)f2=1;
+          if(temp->left)q.push(temp->left);
+          if(temp->right)q.push(temp->right);
+      }
+      if(f1 and f2){
+          return true;
+      }
+      if(f1 or f2){
+          return false;
+      }
+  }
+  return false;
+    // if ((level(root, a, 1) == level(root, b, 1)) && !(isSibling(root, a, b)))
+    //     return 1;
+    // else
+    //     return 0;
+
+
+   
+}
+
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(Height of the Tree).
