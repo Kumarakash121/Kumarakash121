@@ -1,0 +1,64 @@
+Three Sum Closest
+EasyAccuracy: 40.62%Submissions: 30066Points: 2
+Given an array, Arr of N numbers, and another number target, find three integers in the array such that the sum is closest to the target. Return the sum of the three 
+integers.
+
+Note: If there are multiple solutions, print the maximum one.
+
+Example 1:
+
+Input:
+N = 6, target = 2
+A[] = {-7,9,8,3,1,1}
+Output: 2
+Explanation: There is one triplet with sum
+2 in the array. Triplet elements are -7,8,
+1 whose sum is 2.
+
+
+
+approach-
+
+first sort the array and fix one element from i=0 to n-3 and pick 2 element by using two pointers ahead of fixed element and if triplet sum equals to target then return
+the triplet sum and if sum <target then increase low pointer and if(target-sum}< (close) then update the closet value with target-sum and update ans with sum and if 
+sum>target then update high pointer and if(target-sum}< (close) then update the closet value with target-sum and update ans with sum . and return ans;
+
+ int threeSumClosest(vector<int> arr, int target) {
+        // Your code goes here
+        sort(arr.begin(),arr.end());
+        
+        int close=INT_MAX;
+        int ans=-1;
+        for(int i=0;i<arr.size()-2;i++){
+            int l=i+1;
+            int h=arr.size()-1;
+            int p=target-arr[i];
+        
+            while(l<h){
+               
+                if(arr[i]+arr[l]+arr[h]==target){
+                    return target;
+                }
+                else if(arr[i]+arr[l]+arr[h]>target){
+                    if(abs(target-(arr[i]+arr[l]+arr[h]))<=close){
+                        ans=arr[i]+arr[l]+arr[h];
+                        close=abs(target-(arr[i]+arr[l]+arr[h]));
+                    }
+                    h--;
+                }
+                else{
+                    if(abs(target-(arr[i]+arr[l]+arr[h]))<close){
+                        ans=arr[i]+arr[l]+arr[h];
+                        close=abs(target-(arr[i]+arr[l]+arr[h]));
+                    }
+                    // cout<<close<<endl;
+                    l++;
+                }
+            }
+        }
+        return ans;
+    }
+    
+    
+    Expected Time Complexity: O(N*N).
+Expected Auxiliary Space: O(1).
