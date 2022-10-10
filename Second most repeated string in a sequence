@@ -1,0 +1,51 @@
+Second most repeated string in a sequence
+EasyAccuracy: 50.47%Submissions: 30236Points: 2
+Given a sequence of strings, the task is to find out the second most repeated (or frequent) string in the given sequence.
+
+Note: No two strings are the second most repeated, there will be always a single string.
+
+Example 1:
+
+Input:
+N = 6
+arr[] = {aaa, bbb, ccc, bbb, aaa, aaa}
+Output: bbb
+Explanation: "bbb" is the second most 
+occurring string with frequency 2.
+
+
+
+map all the strings with their count and if count is greater than max then update max and update second max  with max and max with count and also string and second
+string and if count is not greater than max but count is greater than second max but count not equals to max then update second max with count and update second string
+
+
+string secFrequent (string arr[], int n)
+    {
+        //code here.
+        unordered_map<string,int>m;
+        for(int i=0;i<n;i++){
+            m[arr[i]]++;
+        }
+        int max=INT_MIN;
+        int sec=INT_MIN;
+        string f="";
+        string s="";
+        for(auto x:m){
+            if(x.second>max){
+                s=f;
+                sec=max;
+               f=x.first;
+                max=x.second;
+            }
+            else if(x.second>sec && x.second!=max){
+                sec=x.second;
+                s=x.first;
+            }
+            
+        }
+        return s;
+    }
+    
+    
+    Time Complexity: O(N), where N represents the size of the given vector.
+Auxiliary Space: O(N), where N represents the size of the given vector.
