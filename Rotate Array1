@@ -1,0 +1,43 @@
+Rotate Array
+EasyAccuracy: 50.28%Submissions: 100k+Points: 2
+LampGeek Week 2022 is LIVE! Click Here to View All the Exciting Offers!
+Given an unsorted array arr[] of size N. Rotate the array to the left (counter-clockwise direction) by D steps, where D is a positive integer. 
+
+ 
+
+Example 1:
+
+Input:
+N = 5, D = 2
+arr[] = {1,2,3,4,5}
+Output: 3 4 5 1 2
+Explanation: 1 2 3 4 5  when rotated
+by 2 elements, it becomes 3 4 5 1 2.
+
+
+
+if array is rotated by d times then new position of ith element is (i+n-d)%n and if d>n then do d=d%n 
+
+
+void rotateArr(int arr[], int d, int n){
+        // code here
+        int temp[n]={0};
+        if(n<d){
+            d=d%n;
+        }
+        for(int i=0;i<n;i++){
+            
+            temp[(i+(n-d))%n]=arr[i];
+            //  cout<<(i+n-d)%n<<endl;
+            //  cout<<d<<endl;
+        }
+        for(int i=0;i<n;i++){
+            arr[i]=temp[i];
+        }
+    }
+    
+    
+    Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+ 
