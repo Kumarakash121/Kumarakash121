@@ -1,0 +1,60 @@
+Level order traversal in spiral form
+EasyAccuracy: 43.27%Submissions: 100k+Points: 2
+
+Complete the function to find spiral order traversal of a tree. For below tree, function should return 1, 2, 3, 4, 5, 6, 7.
+
+
+ 
+ 
+ create a queue and do level order traversal at every level push the level in temp vector if !flag then reverse temp and push it to ans vector 
+ 
+ 
+ vector<int> findSpiral(Node *root)
+{
+    //Your code here
+    if(!root){
+        return {};
+    }
+    
+    queue<Node*>q;
+    q.push(root);
+    bool flag=false;
+    vector<int>v;
+    while(!q.empty()){
+        // Node*top=q.front();
+       int sz=q.size();
+        // q.pop();
+        vector<int>temp;
+        while(sz--){
+             Node*top=q.front();
+            q.pop();
+            if(top->left){
+                q.push(top->left);
+            }
+            if(top->right){
+                q.push(top->right);
+            }
+            temp.push_back(top->data);
+        }  
+        if(!flag){
+            reverse(temp.begin(),temp.end());
+            // v.push_back(temp);
+        }
+        // else{
+        //     v.push_back(temp);
+        // }
+         for(int i=0;i<temp.size();i++) {
+
+            v.push_back(temp[i]);
+
+        }
+        flag=!flag;
+    }
+    
+    return v;
+}
+
+
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(N).
