@@ -1,0 +1,59 @@
+Reverse words in a given string
+EasyAccuracy: 50.0%Submissions: 100k+Points: 2
+Lamp
+Geek Week 2022 is LIVE! Click Here to View All the Exciting Offers!  
+
+Given a String S, reverse the string without reversing its individual words. Words are separated by dots.
+
+Example 1:
+
+Input:
+S = i.like.this.program.very.much
+Output: much.very.program.this.like.i
+Explanation: After reversing the whole
+string(not individual words), the input
+string becomes
+much.very.program.this.like.i
+Example 2:
+
+Input:
+S = pqr.mno
+Output: mno.pqr
+Explanation: After reversing the whole
+string , the input string becomes
+mno.pqr
+
+
+
+
+string reverseWords(string S) 
+    { 
+        // code here 
+        string ans="";
+        string s="";
+        // int i=0;
+        int i=S.length()-1;
+        
+        while(i>=0){
+            // cout<<i<<endl;
+            if(S[i]=='.'){
+                reverse(ans.begin(),ans.end());
+                s+=ans;
+                s.push_back('.');
+                // cout<<s<<endl;
+                ans="";
+            }
+            else{
+                ans+=S[i];
+                // cout<<ans;
+            }
+            i--;
+        }
+        reverse(ans.begin(),ans.end());
+        s+=ans;
+        return s;
+    } 
+    
+    
+    Expected Time Complexity: O(|S|)
+Expected Auxiliary Space: O(|S|)
